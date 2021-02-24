@@ -1,0 +1,104 @@
+<%- include ("./partials/head.ejs") %>
+<!-- PAGE LEVEL CSS START-->
+
+<!-- PAGE LEVEL CSS END -->
+
+<!-- HEADER START -->
+<%- include ("./partials/header.ejs") %>
+<!--HEADER END -->
+<section class="p-3 shadow-sm text-center bg-light d-flex">
+    <h3>Dashboard</h3>
+    <a href="/user/logout" class="btn btn-danger ml-auto">Log Out</a>
+</section>
+
+<section id="api-wrapper" class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-6" id="fetch-user-wrapper">
+            <h4 class="p-3 text-center bg-light">API Queries</h4>
+            <h4>URL Structure</h4>
+            <p>URL acceps below params:</p>
+            <ul>
+                <li><strong>limit</strong>: use to limit number of retured rows. Default limit is 3.</li>
+                <li><strong>cursor</strong>: it is used along with <strong>limit</strong> for <strong>pagination purpose</strong>. Defaut
+                    is 0.</li>
+                <li><strong>searchText</strong>: search user with first name, last name, employee id and organization
+                    name.</li>
+                <li><strong>sortBy</strong>: for sorting user data. Available options are <strong>id</strong>,
+                    <strong>first_name</strong>, <strong>last_name</strong>, <strong>email</strong>,
+                    <strong>employee_id</strong>, <strong>organization_name</strong>. The default value is
+                    <strong>id</strong>.</li>
+                <li><strong>sortAs</strong>: order data in ascending or descending order. Available options are <strong>asc</strong> and <strong>desc</strong>.</li>
+            </ul>
+            <details>
+                <summary>http://example.com:5000/userList</summary>
+                <p>This is default URL. Copy paste the URL in address bar and execute it to fetch details.</p>
+            </details>
+
+            <details>
+                <summary>http://localhost:5000/userList?limit=10&cursor=0&searchText=sharma&sortBy=employee_id&sortAs=desc</summary>
+                <p>URKL structure with all query prams.</p>
+            </details>
+
+        </div>
+        <div class="col-md-6" id="user-result-wrapper">
+            <h4 class="p-3 text-center bg-light">Result Set</h4>
+
+            <% if (typeof(data) == 'object' && data) { %>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Sl. No.</th>
+                            <th>User ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Employee ID</th>
+                            <th>Organization</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% data.forEach((user, index) => { %>
+                        <tr>
+                            <td><%- index + 1 %></td>
+                            <td><%- user.id %></td>
+                            <td><%- user.first_name %></td>
+                            <td><%- user.last_name %></td>
+                            <td><%- user.email %></td>
+                            <td><%- user.employee_id %></td>
+                            <td><%- user.organization_name %></td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+            <% } %>
+
+        </div>
+    </div>
+</section>
+<!-- FOOTER START -->
+<%- include ("./partials/header.ejs") %>
+
+<!-- PAGE LEVEL JS HERE-->
+<script>
+    $('#next').click(function () {
+        $.ajax({
+            url: "/userList",
+            type: "POST",
+            data: {
+                cursor: 4
+            },
+            success: function (response) {
+                //Do Something
+            },
+            error: function (xhr) {
+                //Do Something to handle error
+            }
+        });
+    })
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<%- include ("./partials/head.ejs") %>
+<!-- PAGE LEVEL CSS START-->
+
+<!-- PAGE LEVEL CSS END -->
+
+<!-- HEADER START -->
+<%- include ("./partials/header.ejs") %>
+<!--HEADER END -->
+
+<div class="background"></div>
+
+<div id="login-wrapper">
+    <div id="inner-login">
+        <div class="login-header position-relative text-center pt-4">
+            <h3 class="mt-3">Welcome!</h3>
+            <hr class="bottom-line" />
+        </div>
+        <div id="loginBody" class="text-center pt-3 px-sm-5">
+            <% if(typeof(errors) == 'object') { %>
+                <ul class="bg-warning px-5 py-3">
+                    <% errors.forEach(item => { %>
+                        <li><%- item.msg %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+
+            <% if(typeof(isLoggedIn) == 'boolean') { %>
+                <ul class="bg-warning px-5 py-3">
+                    <li><%- msg %></li>
+                </ul>
+            <% } %>
+
+            <form action="/user/login" method="POST">
+                <div class="form-row">
+                    <input type="text" class="form-control py-4 text-center" id="username" name="username" placeholder="User Email" value="<%- typeof(username) == 'string' ? username : '' %>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="">
+                </div>
+                <div class="form-row pt-3">
+                    <input type="password" class="form-control py-4 text-center" id="password" name="password"
+                        placeholder="Password">
+                </div>
+                <div class="form-row pt-3">
+                    <button type="submit" class="btn btn-success font-weight-bold mx-auto px-5">Login</button>
+                </div>
+                <div class="form-row pt-3">
+                    <a href="/user/register" class="mx-auto">New User? Register Now</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER START -->
+<%- include ("./partials/header.ejs") %>
+
+<!-- PAGE LEVEL JS HERE-->
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<%- include ("./partials/head.ejs") %>
+<!-- PAGE LEVEL CSS START-->
+
+<!-- PAGE LEVEL CSS END -->
+
+<!-- HEADER START -->
+<%- include ("./partials/header.ejs") %>
+<!--HEADER END -->
+<div class="background"></div>
+
+<div class="container-fluid">
+    <div class="container p-md-5">
+        <form class="p-md-5 bg-white" id="register-form" action="/user/register" method="POST">
+            <div class="p-3 mt-5 shadow-sm text-center bg-light">
+                <h3>Register</h3>
+            </div>
+
+            <% if(typeof(errors) == 'object') { %>
+                <ul class="bg-warning px-5 py-3">
+                    <% errors.forEach(item => { %>
+                        <li><%- item.msg %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+
+            <% if(typeof(isEmailUnique) == 'string') { %>
+                <ul class="bg-warning px-5 py-3">
+                    <li><%- msg %></li>
+                </ul>
+            <% } %>
+
+            <div class="form-row mt-5">
+                <p class="form-input col-sm-6 col-12">
+                    <input type="text" name="first_name" id="first_name" class="form-control" value="<%- typeof(userInput) == 'object' ? userInput.first_name : '' %>" placeholder="First Name (Min. 2 characters)" pattern=".{2,}" required>
+                </p>
+                <p class="form-input col-sm-6 col-12">
+                    <input type="text" name="last_name" id="last_name" class="form-control" value="<%- typeof(userInput) == 'object' ? userInput.last_name : '' %>" placeholder="Last Name" required="">
+                </p>
+            </div>
+
+            <div class="form-row mt-3">
+                <p class="form-input col-sm-6 col-12">
+                    <input type="email" name="user_email" id="user_email" class="form-control" value="<%- typeof(userInput) == 'object' ? userInput.user_email : '' %>" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="">
+                </p>
+                <p class="form-input col-sm-6 col-12">
+                    <input type="text" name="org_name" id="org_name" class="form-control" value="<%- typeof(userInput) == 'object' ? userInput.org_name : '' %>" placeholder="Organization Name(Min. 2 characters)" pattern=".{2,}" required>
+                </p>
+            </div>
+
+            <div class="form-row mt-3">
+                <p class="form-input col-sm-6 col-12">
+                    <input type="password" name="user_pwd" id="user_pwd" class="form-control" value="" placeholder="Password(Min. 6 characters)" pattern=".{6,}" required>
+                </p>
+                <p class="form-input col-sm-6 col-12">
+                    <input type="password" name="confirm_pwd" id="confirm_pwd" class="form-control" value="" placeholder="Confirm Password(Min. 6 characters)" pattern=".{6,}" required>
+                </p>
+            </div>
+
+            <p class="form-input mt-3">
+                <input type="submit" name="register" id="register" class="btn w-100 btn-primary font-weight-bold" value="Register">
+            </p>
+
+            <p class="text-center">
+                <a href="/user/login" class="font-weight-bold">Already registered? Login</a>
+            </p>
+        </form>
+    </div>
+</div>
+
+<!-- FOOTER START -->
+<%- include ("./partials/header.ejs") %>
+
+<!-- PAGE LEVEL JS HERE-->
+
+</body>
+
+</html>
