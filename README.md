@@ -30,4 +30,4 @@
     - JWT for authentication.
     - PostgreSQL database.
     - Three PostgreSQL functions for unique employee id generation, user registration and searching user data with filter and sorting.
-    
+    - pm2 service for running NodeJS application.
