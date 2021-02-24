@@ -26,6 +26,7 @@
         -partials #reuasable templates like header, footer, sidebar
         
 4. Implementations:
+    - Digitalocean Droplet - Ubuntu
     - NodeJS with ExpressJS Framework.
     - JWT for authentication.
     - PostgreSQL database.
